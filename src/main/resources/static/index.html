@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<body>
+基于shiro的无状态控制角色及权限<br/>
+https://pig4cloud.com/<br/>
+使用Shiro主要做3件事情，1）用户登录时做用户名密码校验；2）用户登录后收到请求时做JWT Token的校验；3）用户权限的校验<br/>
+IE浏览器对URL的GET请求最大限制为2083个字符，如果超过这个数字，提交按钮没有任何反应。<br/>
+<br/>
+前后端分离之后，因为HTTP本身是无状态的，Session就没法用了。<br/>
+项目采用jwt的方案后，请求的主要流程如下：<br/>
+用户登录成功之后，服务端会创建一个jwt的token（jwt的这个token中记录了当前的操作账号），<br/>
+并将这个token返回给前端，前端每次请求服务端的数据时，都会将令牌放入Header或者Parameter中，<br/>
+服务端接收到请求后，会先被拦截器拦截，token检验的拦截器会获取请求中的token，<br/>
+然后会检验token的有效性，拦截器都检验成功后，请求会成功到达实际的业务流程中，执行业务逻辑返回给前端数据。<br/>
+在这个过程中，主要涉及到Shiro的拦截器链，Jwt的token管理，多Realm配置等<br/>
+</body>
+</html>
